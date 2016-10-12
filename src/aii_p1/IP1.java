@@ -5,6 +5,10 @@
  */
 package aii_p1;
 
+import java.awt.Color;
+import java.io.*;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author Joel
@@ -14,6 +18,7 @@ public class IP1 extends javax.swing.JFrame {
     /**
      * Creates new form IP1
      */
+    AL1 ga = new AL1();
     public IP1() {
         initComponents();
     }
@@ -30,10 +35,11 @@ public class IP1 extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         Mabrir = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        guardarc = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -42,6 +48,18 @@ public class IP1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setViewportView(jEditorPane1);
+
+        jButton1.setText("Análisis léxico");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jMenu2.setText("Archivo");
 
@@ -53,15 +71,20 @@ public class IP1 extends javax.swing.JFrame {
         });
         jMenu2.add(Mabrir);
 
-        jMenu4.setText("Guardar Como");
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+        guardarc.setText("Guardar como...");
+        guardarc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu4MouseClicked(evt);
+                guardarcMouseClicked(evt);
             }
         });
-        jMenu2.add(jMenu4);
+        jMenu2.add(guardarc);
 
         jMenu5.setText("Guardar");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
         jMenu2.add(jMenu5);
 
         jMenuBar1.add(jMenu2);
@@ -78,13 +101,17 @@ public class IP1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -92,12 +119,59 @@ public class IP1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MabrirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MabrirMouseClicked
-            // TODO add your handling code here:
+         String aux="",   
+        texto="";
+        try
+        {
+         /**llamamos el metodo que permite cargar la ventana*/
+         JFileChooser file=new JFileChooser();
+         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
+         file.setFileFilter(filtro);
+         file.setCurrentDirectory(new File("microp"));
+         file.showOpenDialog(this);
+         /**abrimos el archivo seleccionado*/
+         File abre=file.getSelectedFile();
+
+         /**recorremos el archivo, lo leemos para plasmarlo
+         *en el area de texto*/
+         if(abre!=null)
+         {     
+            FileReader archivos=new FileReader(abre);
+            BufferedReader lee=new BufferedReader(archivos);
+            while((aux=lee.readLine())!=null)
+            {
+               texto+= aux+ "\n";
+            }
+               lee.close();
+          }    
+         }
+         catch(IOException ex)
+         {
+           JOptionPane.showMessageDialog(null,ex+"" +
+                 "\nNo se ha encontrado el archivo",
+                       "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+          }
+        jEditorPane1.setText(texto);//El texto se almacena en el JTextArea
     }//GEN-LAST:event_MabrirMouseClicked
 
-    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+    private void guardarcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarcMouseClicked
                     
-    }//GEN-LAST:event_jMenu4MouseClicked
+                    ga.guardarCopia();
+                    
+                    
+    }//GEN-LAST:event_guardarcMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    jButton1.setBackground(Color.YELLOW);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        ga.guardarCopia();        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -106,11 +180,12 @@ public class IP1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Mabrir;
+    private javax.swing.JMenu guardarc;
+    private javax.swing.JButton jButton1;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
