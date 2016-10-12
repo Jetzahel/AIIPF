@@ -14,11 +14,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Joel
  */
 public class IP1 extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form IP1
      */
     AL1 ga = new AL1();
+    String data;
     public IP1() {
         initComponents();
     }
@@ -33,12 +35,14 @@ public class IP1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        areat = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         Mabrir = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         guardarc = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -47,21 +51,26 @@ public class IP1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(jEditorPane1);
-
         jButton1.setText("Análisis léxico");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+
+        areat.setColumns(20);
+        areat.setRows(5);
+        jScrollPane2.setViewportView(areat);
 
         jMenu2.setText("Archivo");
+
+        jMenuItem1.setText("Nuevo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
 
         Mabrir.setText("Abrir...");
         Mabrir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -70,6 +79,7 @@ public class IP1 extends javax.swing.JFrame {
             }
         });
         jMenu2.add(Mabrir);
+        jMenu2.add(jSeparator1);
 
         guardarc.setText("Guardar como...");
         guardarc.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -99,20 +109,20 @@ public class IP1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(jButton1)
-                .addGap(43, 43, 43))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,6 +153,7 @@ public class IP1 extends javax.swing.JFrame {
                texto+= aux+ "\n";
             }
                lee.close();
+               areat.setText(texto);//El texto se almacena en el JTextArea
           }    
          }
          catch(IOException ex)
@@ -151,27 +162,31 @@ public class IP1 extends javax.swing.JFrame {
                  "\nNo se ha encontrado el archivo",
                        "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
           }
-        jEditorPane1.setText(texto);//El texto se almacena en el JTextArea
+        
     }//GEN-LAST:event_MabrirMouseClicked
 
+    public String leer(){
+    String data = areat.getText();
+    return data;
+}
+   
     private void guardarcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarcMouseClicked
-                    
-                    ga.guardarCopia();
-                    
-                    
+                                 
+                    ga.guardarCopia(leer());                                   
     }//GEN-LAST:event_guardarcMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    jButton1.setBackground(Color.YELLOW);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        ga.guardarCopia();        // TODO add your handling code here:
+        ga.guardarCopia(leer());        // TODO add your handling code here:
     }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    areat.setText("");    // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,14 +195,16 @@ public class IP1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Mabrir;
+    public javax.swing.JTextArea areat;
     private javax.swing.JMenu guardarc;
     private javax.swing.JButton jButton1;
-    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
