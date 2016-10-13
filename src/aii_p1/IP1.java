@@ -41,6 +41,7 @@ public class IP1 extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         Mabrir = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         guardarc = new javax.swing.JMenu();
@@ -57,6 +58,11 @@ public class IP1 extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         areat.setColumns(20);
         areat.setRows(5);
@@ -71,6 +77,7 @@ public class IP1 extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem1);
+        jMenu2.add(jSeparator2);
 
         Mabrir.setText("Abrir...");
         Mabrir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -188,6 +195,10 @@ public class IP1 extends javax.swing.JFrame {
     areat.setText("");    // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    ga.generarT(leer());        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -206,5 +217,6 @@ public class IP1 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }
