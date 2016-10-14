@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.io.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Joel
@@ -16,13 +17,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class IP1 extends javax.swing.JFrame {
     
 
-    /**
-     * Creates new form IP1
-     */
     AL1 ga = new AL1();
+
     String data;
+    static DefaultTableModel modelo = new DefaultTableModel();
     public IP1() {
-        initComponents();
+        initComponents();   
+        modelo.setColumnIdentifiers(new Object [] {"id", "token", "lexema"});
+        tabla.setModel(modelo);
+        
     }
 
     /**
@@ -38,6 +41,8 @@ public class IP1 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         areat = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -46,7 +51,6 @@ public class IP1 extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         guardarc = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -67,6 +71,16 @@ public class IP1 extends javax.swing.JFrame {
         areat.setColumns(20);
         areat.setRows(5);
         jScrollPane2.setViewportView(areat);
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
 
         jMenu2.setText("Archivo");
 
@@ -106,9 +120,6 @@ public class IP1 extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Ayuda");
-        jMenuBar1.add(jMenu3);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,8 +130,10 @@ public class IP1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(jButton1)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,8 +141,11 @@ public class IP1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(150, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,7 +162,7 @@ public class IP1 extends javax.swing.JFrame {
          file.setFileFilter(filtro);
          file.setCurrentDirectory(new File("microp"));
          file.showOpenDialog(this);
-         /**abrimos el archivo seleccionado*/
+         /*abrimos el archivo seleccionado*/
          File abre=file.getSelectedFile();
 
          /**recorremos el archivo, lo leemos para plasmarlo
@@ -196,9 +212,15 @@ public class IP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    ga.generarT(leer());        // TODO add your handling code here:
+        
+       
+        
+        
+        ga.generarTokens(leer());
+     
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -211,12 +233,13 @@ public class IP1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

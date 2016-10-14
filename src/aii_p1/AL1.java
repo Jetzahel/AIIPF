@@ -5,11 +5,14 @@
  */
 package aii_p1;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,7 +20,9 @@ import javax.swing.JTextArea;
  */
 public class AL1 {
     
-   
+    Tabla it = new Tabla();
+    static String inf[] = new String[3];
+       
     public void escfi(String nf, String data){
         try {
             FileWriter fw=  new FileWriter(nf,true);
@@ -63,103 +68,172 @@ public class AL1 {
                     }
     }
     
-    public void generarT(String data){
-        
-        
-        
+    public void generarTokens(String data){
+           
         StringTokenizer st = new StringTokenizer(data,"\n");
-        int cont=1;
+        int linea=1;
+        
         
         while(st.hasMoreTokens()){
             
             String patron = ("([{|}]+)|(si)|(cont)|(num)|(cad)|(leer)|(imp)|([a-zA-Z]+[0-9]+)"
-                           + "|([0-9]+)|([<|>]+)|([(|)]+)|(;)|('[\\s\\w.]*')|(=)"); 
-            Pattern p = Pattern.compile(patron);
+                           + "|([0-9]+)|([<|>]+)|([(|)]+)|(;)|('[\\s\\w.]*')|(=)|([^\\s=<>';])"); 
+            Pattern p = Pattern.compile(patron);          
             Matcher mat = p.matcher(st.nextToken());
-            
             while(mat.find()){
-                
+
                 
                 String tokenTipo1 = mat.group(1);
                 if(tokenTipo1 != null){
-                    System.out.println("Delimitaor "+tokenTipo1);
+                    inf[1]= "llave";
+                    inf[0]="50";                  
+                    inf[2]=tokenTipo1;
+                    
+                    it.llenarT(inf);                 
                 }
                 
                 String tokenTipo2 = mat.group(2);
                 if(tokenTipo2 != null){
-                    System.out.println("palabra reservada  "+tokenTipo2);
+                    inf[1]= "palabra r";
+                    inf[0]="10";
+                    inf[2]=tokenTipo2;  
+                    
+                    it.llenarT(inf);                   
                 }
                 
                 String tokenTipo3 = mat.group(3);
                 if(tokenTipo3 != null){
-                    System.out.println("palabra reservada  "+tokenTipo3);
+                    inf[1]= "palabra r";
+                    inf[0]="11";                                   
+                    inf[2]=tokenTipo3;
+                    
+                    it.llenarT(inf);               
                 }
                 
                 String tokenTipo4 = mat.group(4);
                 if(tokenTipo4 != null){
-                    System.out.println("Tipo de Dato  "+tokenTipo4);
+                    inf[1]= "tipo dato";
+                    inf[0]="12";
+                    inf[2]=tokenTipo4;
+                    
+                    it.llenarT(inf);
                 }
                 
                 String tokenTipo5 = mat.group(5);
                 if(tokenTipo5 != null){
-                    System.out.println("Tipo de Dato  "+tokenTipo5);
+                    inf[1]= "tipo dato";
+                    inf[0]="13";
+                    inf[2]=tokenTipo5;
+                    
+                    it.llenarT(inf);   
                 }
                 
                 String tokenTipo6 = mat.group(6);
                 if(tokenTipo6 != null){
-                    System.out.println("Pendiente  "+tokenTipo6);
+                    inf[1]= "palabra r";
+                    inf[0]="14";
+                    inf[2]=tokenTipo6;
+                    
+                    it.llenarT(inf);
+                    
                 }
                 
                 String tokenTipo7 = mat.group(7);
                 if(tokenTipo7 != null){
-                    System.out.println("Pendiente  "+tokenTipo7);
+                    inf[1]= "palabra r";
+                    inf[0]="15";
+                    inf[2]=tokenTipo7;  
+                    
+                    it.llenarT(inf);                   
                 }
-                
                 
                 String tokenTipo8 = mat.group(8);
                 if(tokenTipo8 != null){
-                    System.out.println("Variable  "+tokenTipo8);
+                    inf[1]= "identificador";
+                    inf[0]="20";
+                    inf[2]=tokenTipo8;  
+                    
+                    it.llenarT(inf);                  
                 }
                 
                 String tokenTipo9 = mat.group(9);
                 if(tokenTipo9 != null){
-                    System.out.println("Número  "+tokenTipo9);
+                    inf[1]= "numero";
+                    inf[0]="21";
+                    inf[2]=tokenTipo9;
+                    
+                    it.llenarT(inf);
                 }
                 
                 String tokenTipo10 = mat.group(10);
                 if(tokenTipo10 != null){
-                    System.out.println("comparacion "+tokenTipo10);
+                    inf[1]= "Ope_Comparacion";
+                    inf[0]="30";
+                    inf[2]=tokenTipo10;
+                    
+                    it.llenarT(inf);                   
                 }
                 
                 String tokenTipo11 = mat.group(11);
                 if(tokenTipo11 != null){
-                    System.out.println("parentecis  "+tokenTipo11);
+                    inf[1]= "parentecis";
+                    inf[0]="52";
+                    inf[2]=tokenTipo11;
+                    
+                    it.llenarT(inf);                   
                 }
                 
                 String tokenTipo12 = mat.group(12);
                 if(tokenTipo12 != null){
-                    System.out.println("simbolo  "+tokenTipo12);
+                    inf[1]= "delimitador";
+                    inf[0]="54";
+                    inf[2]=tokenTipo12;  
+                    
+                    it.llenarT(inf);                  
                 }
                 
                 String tokenTipo13 = mat.group(13);
                 if(tokenTipo13 != null){
-                    System.out.println("cadena  "+tokenTipo13);
+                    inf[1]= "cadena";
+                    inf[0]="22";
+                    inf[2]=tokenTipo13;
+                    
+                    it.llenarT(inf);                   
                 }
                 
                 String tokenTipo14 = mat.group(14);
                 if(tokenTipo14 != null){
-                    System.out.println("asignacion  "+tokenTipo14);
+                    inf[1]= "asignacion";
+                    inf[0]="31";                  
+                    inf[2]=tokenTipo14;
+                    
+                    it.llenarT(inf);
                 }
-            }if(!mat.find()){
-                System.out.println("Desconocido:  ");
+                
+                String tokenTipo15 = mat.group(15);
+                if(tokenTipo15 != null){
+                    manejoErrores(tokenTipo15, linea);
+                }               
             }
-            
-            
-       
-            cont ++;
-        }
-       
-        
+            linea ++;
+        }      
     }
     
+    
+    public void manejoErrores(String e, int l){
+        int ide;
+        switch(e){
+            case "@":
+                ide = 100;
+                System.out.println("Error "+ide);
+                break;
+            case "\\":
+                ide = 101;
+                
+        }
+        
+    }
+    public void llenarArray(){
+         
+     }
 }
