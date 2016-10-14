@@ -19,6 +19,7 @@ public class AII_P1 {
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IP1().setVisible(true);
+                
             }
         });
     }
