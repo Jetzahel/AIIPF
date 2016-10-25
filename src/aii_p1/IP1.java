@@ -5,9 +5,12 @@
  */
 package aii_p1;
 
-import java.awt.Color;
-import java.io.*;
-import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -16,16 +19,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class IP1 extends javax.swing.JFrame {
     
+    AL1 al1 = new AL1();
+    Tabla it = new Tabla();
 
-    AL1 ga = new AL1();
-
-    String data;
     static DefaultTableModel modelo = new DefaultTableModel();
+    
     public IP1() {
         initComponents();   
-        modelo.setColumnIdentifiers(new Object [] {"id", "token", "lexema"});
-        tabla.setModel(modelo);
+        modelo.setColumnIdentifiers(new Object [] {"id", "Token", "Lexema","Linea"});
         
+        tabla.setModel(modelo);     
     }
 
     /**
@@ -43,11 +46,13 @@ public class IP1 extends javax.swing.JFrame {
         areat = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        mme = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        nuevo = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        Mabrir = new javax.swing.JMenu();
+        abrir = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         guardarc = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
@@ -82,24 +87,30 @@ public class IP1 extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
+        mme.setEditable(false);
+        mme.setColumns(20);
+        mme.setRows(5);
+        mme.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jScrollPane3.setViewportView(mme);
+
         jMenu2.setText("Archivo");
 
-        jMenuItem1.setText("Nuevo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        nuevo.setText("Nuevo");
+        nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                nuevoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu2.add(nuevo);
         jMenu2.add(jSeparator2);
 
-        Mabrir.setText("Abrir...");
-        Mabrir.addMouseListener(new java.awt.event.MouseAdapter() {
+        abrir.setText("Abrir...");
+        abrir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MabrirMouseClicked(evt);
+                abrirMouseClicked(evt);
             }
         });
-        jMenu2.add(Mabrir);
+        jMenu2.add(abrir);
         jMenu2.add(jSeparator1);
 
         guardarc.setText("Guardar como...");
@@ -128,31 +139,34 @@ public class IP1 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(38, 38, 38)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MabrirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MabrirMouseClicked
-         String aux="",   
+    private void abrirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirMouseClicked
+        String aux="",   
         texto="";
         try
         {
@@ -171,8 +185,7 @@ public class IP1 extends javax.swing.JFrame {
          {     
             FileReader archivos=new FileReader(abre);
             BufferedReader lee=new BufferedReader(archivos);
-            while((aux=lee.readLine())!=null)
-            {
+            while((aux=lee.readLine())!=null){
                texto+= aux+ "\n";
             }
                lee.close();
@@ -186,7 +199,8 @@ public class IP1 extends javax.swing.JFrame {
                        "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
           }
         
-    }//GEN-LAST:event_MabrirMouseClicked
+        
+    }//GEN-LAST:event_abrirMouseClicked
 
     public String leer(){
     String data = areat.getText();
@@ -194,30 +208,26 @@ public class IP1 extends javax.swing.JFrame {
 }
    
     private void guardarcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarcMouseClicked
-                                 
-                    ga.guardarCopia(leer());                                   
+        al1.guardarCopia(leer());                                   
     }//GEN-LAST:event_guardarcMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        
+ 
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        ga.guardarCopia(leer());        // TODO add your handling code here:
+        al1.guardarCopia(leer());        // TODO add your handling code here:
     }//GEN-LAST:event_jMenu5MouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    areat.setText("");    // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
+        areat.setText("");    // TODO add your handling code here:
+    }//GEN-LAST:event_nuevoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        mme.setText("");
+        it.limpiaTabla();
+        al1.generarTokens(leer());
         
-       
-        
-        
-        ga.generarTokens(leer());
-     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
@@ -227,19 +237,21 @@ public class IP1 extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Mabrir;
-    public javax.swing.JTextArea areat;
+    private javax.swing.JMenu abrir;
+    public static javax.swing.JTextArea areat;
     private javax.swing.JMenu guardarc;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    static javax.swing.JTextArea mme;
+    private javax.swing.JMenuItem nuevo;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,11 +10,19 @@ package aii_p1;
  */
 public class Tabla {
 
-
     public void llenarT(String d[]){
         IP1.modelo.addRow(d);
     }
-
+    
+    public void limpiaTabla(){
+        try{             
+            while(IP1.modelo.getRowCount()!=0){
+                IP1.modelo.removeRow(0);
+            }           
+        }catch(Exception e){
+            
+        }
+    }
     
     public void modificarT(){
         

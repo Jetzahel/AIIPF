@@ -1,0 +1,5 @@
+si0
+cont0
+num0
+cad0
+imp0

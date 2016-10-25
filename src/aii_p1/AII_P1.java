@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package aii_p1;
-
 /**
  *
  * @author Joel
  */
 public class AII_P1 {
-
     /**
      * @param args the command line arguments
      */
@@ -18,8 +16,7 @@ public class AII_P1 {
         // TODO code application logic here
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IP1().setVisible(true);
-                
+                new IP1().setVisible(true);               
             }
         });
     }

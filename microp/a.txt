@@ -1,0 +1,4 @@
+num        var0;
+si    (var0 > 0){
+cad palabra0 = 'lopez';
+}
