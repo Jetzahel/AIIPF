@@ -4,10 +4,10 @@ package aii_p1;
 public class LiFo_Pila {
       int a=1;
     public class Nodo{ // private
-        String info;
+        int info;
         Nodo siguiente;
     
-    public Nodo(String I){
+    public Nodo(int I){
         info=I;
         siguiente=null;
     }
@@ -15,7 +15,7 @@ public class LiFo_Pila {
     } //clase Nodo
     
     public Nodo inicio,Recorre; //private
-    String temporal;
+   int temporal;
     
     public LiFo_Pila(){
         inicio=null;
@@ -23,7 +23,7 @@ public class LiFo_Pila {
     public boolean pila_vacia(){ // private
         return inicio==null;
     }
-    public void Insertar(String dato){
+    public void Insertar(int dato){
         Nodo Nuevo;
         if(pila_vacia()){
             inicio=new Nodo(dato);
@@ -37,7 +37,7 @@ public class LiFo_Pila {
             Nuevo=null;
         }
     }
-    public String Eliminar(){
+    public int Eliminar(){
         
 
         if(!pila_vacia()){

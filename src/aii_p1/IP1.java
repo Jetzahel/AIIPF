@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -22,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class IP1 extends javax.swing.JFrame {
     
     AL1 al1 = new AL1();
+    AS as = new AS();
     Tabla it = new Tabla();
 
     static DefaultTableModel modelo = new DefaultTableModel();
@@ -31,6 +33,7 @@ public class IP1 extends javax.swing.JFrame {
         modelo.setColumnIdentifiers(new Object [] {"idToken", "Lexema","Linea","Valor"}); 
         tabla.setModel(modelo);    
         tabla.setEnabled(false);
+        nl.append("1");
         alb.setEnabled(false);
         asb.setEnabled(false);
     }
@@ -53,6 +56,8 @@ public class IP1 extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         mme = new javax.swing.JTextArea();
         asb = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        nl = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         nuevo = new javax.swing.JMenuItem();
@@ -112,6 +117,18 @@ public class IP1 extends javax.swing.JFrame {
         jScrollPane3.setViewportView(mme);
 
         asb.setText("Análisis Sintáctico");
+        asb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                asbMouseClicked(evt);
+            }
+        });
+
+        nl.setBackground(new java.awt.Color(238, 238, 238));
+        nl.setColumns(1);
+        nl.setRows(1);
+        nl.setBorder(null);
+        nl.setFocusable(false);
+        jScrollPane4.setViewportView(nl);
 
         jMenu2.setText("Archivo");
 
@@ -161,35 +178,40 @@ public class IP1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(asb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(alb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(alb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(asb))
-                    .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane4)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -271,6 +293,10 @@ public class IP1 extends javax.swing.JFrame {
 
     private void areatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyPressed
         // TODO add your handling code here:    
+        nl.setText("");
+        for (int i = 1; i <= areat.getLineCount(); i++) {
+            nl.append(i+"\n");
+        }
     }//GEN-LAST:event_areatKeyPressed
 
     private void areatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyTyped
@@ -279,12 +305,22 @@ public class IP1 extends javax.swing.JFrame {
 
     private void areatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyReleased
         // TODO add your handling code here:
+        nl.setText("");
+        for (int i = 1; i <= areat.getLineCount(); i++) {
+            nl.append(i+"\n");
+        }
         if(areat.getSelectionStart()==0){
+            
             alb.setEnabled(false);           
         }else if(areat.getSelectionStart()!=0){
             alb.setEnabled(true);
         }
     }//GEN-LAST:event_areatKeyReleased
+
+    private void asbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_asbMouseClicked
+        // TODO add your handling code here:
+        as.llenarP();
+    }//GEN-LAST:event_asbMouseClicked
 
     
     /**
@@ -306,9 +342,11 @@ public class IP1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     static javax.swing.JTextArea mme;
+    static javax.swing.JTextArea nl;
     private javax.swing.JMenuItem nuevo;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

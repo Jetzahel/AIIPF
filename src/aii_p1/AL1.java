@@ -211,7 +211,6 @@ public class AL1 {
                     if(tokenTipo8 != null){
                         
                         if(IP1.modelo.getValueAt(a1, 1).equals("=") && null==IP1.modelo.getValueAt(a1-1,3)){
-                            //System.out.println(IP1.modelo.getValueAt(a1-1,3));
                            IP1.modelo.setValueAt(tokenTipo8, a1-1,3);
                         }
                         inf[0]="21"; 
@@ -288,7 +287,6 @@ public class AL1 {
                 String tokenTipo16 = mat.group(16);//=
                 if(tokenTipo16 != null){
                     a1 = IP1.modelo.getRowCount();
-                    System.out.println(a1);
                     //inf[1]= "Asignacion";
                     inf[0]="42";
                     inf[1]=tokenTipo16;  
