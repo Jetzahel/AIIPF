@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -241,7 +242,7 @@ public class IP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_guardarcMouseClicked
 
     private void albMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_albMouseClicked
- 
+
     }//GEN-LAST:event_albMouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
@@ -249,6 +250,7 @@ public class IP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
+        alb.setEnabled(false);
         areat.setText("");    // TODO add your handling code here:
     }//GEN-LAST:event_nuevoActionPerformed
 
@@ -264,28 +266,21 @@ public class IP1 extends javax.swing.JFrame {
         }else{
             asb.setEnabled(false);
             alb.setForeground(Color.RED);
-        }
-        
+        }      
     }//GEN-LAST:event_albActionPerformed
 
     private void areatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyPressed
-        // TODO add your handling code here:
-        String voll= areat.getText();
-         //System.out.println(areat.getSelectionEnd());
-        
+        // TODO add your handling code here:    
     }//GEN-LAST:event_areatKeyPressed
 
     private void areatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyTyped
-        // TODO add your handling code here:
-       
+        // TODO add your handling code here:    
     }//GEN-LAST:event_areatKeyTyped
 
     private void areatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyReleased
         // TODO add your handling code here:
-        System.out.println(areat.getSelectionStart());
         if(areat.getSelectionStart()==0){
-            alb.setEnabled(false);
-            asb.setEnabled(false);            
+            alb.setEnabled(false);           
         }else if(areat.getSelectionStart()!=0){
             alb.setEnabled(true);
         }

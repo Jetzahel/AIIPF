@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package aii_p1;
-import java.awt.Color;
 import java.io.*;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -66,7 +65,8 @@ public class AL1 {
     }
     
     public void generarTokens(String data){
-           
+        
+        int a1=0, a2=0;   
         StringTokenizer st = new StringTokenizer(data,"\n");
         int linea=1;
         
@@ -146,22 +146,15 @@ public class AL1 {
                               + "|(cad)"
                               + "|(imp)"
                               + "|([^\\s=<>';\\(\\)])"
-                              + "|('[\\s\\w.]*')"
+                              + "|('[\\s\\w.]*')"//
                               + "|(\\()"
                               + "|(\\))"); 
             
                 Pattern p = Pattern.compile(patron);             
-                Matcher mat = p.matcher(t);              
+                Matcher mat = p.matcher(t);   
+                
        
             while(mat.find()){
-//                String tokenTipo1 = mat.group(1);//siinden
-//                if(tokenTipo1 != null){
-//                    inf[0]="20";
-//                    //inf[1]= "identificador";         
-//                    inf[1]=tokenTipo1;
-//                    inf[2]=String.valueOf(linea);
-//                    it.llenarT(inf);                   
-//                }
 
                 String tokenTipo2 = mat.group(2);//contiden
                     if(tokenTipo2 != null){
@@ -216,6 +209,11 @@ public class AL1 {
                     
                 String tokenTipo8 = mat.group(8);//identificador
                     if(tokenTipo8 != null){
+                        
+                        if(IP1.modelo.getValueAt(a1, 1).equals("=") && null==IP1.modelo.getValueAt(a1-1,3)){
+                            //System.out.println(IP1.modelo.getValueAt(a1-1,3));
+                           IP1.modelo.setValueAt(tokenTipo8, a1-1,3);
+                        }
                         inf[0]="21"; 
                         //inf[1]= "numero";                                     
                         inf[1]=tokenTipo8;
@@ -289,6 +287,8 @@ public class AL1 {
                  
                 String tokenTipo16 = mat.group(16);//=
                 if(tokenTipo16 != null){
+                    a1 = IP1.modelo.getRowCount();
+                    System.out.println(a1);
                     //inf[1]= "Asignacion";
                     inf[0]="42";
                     inf[1]=tokenTipo16;  
@@ -385,6 +385,10 @@ public class AL1 {
                 
                 String tokenTipo27 = mat.group(27);//=
                 if(tokenTipo27 != null){
+                    
+                    if(IP1.modelo.getValueAt(a1, 1).equals("=") && null==IP1.modelo.getValueAt(a1-1,3)){
+                           IP1.modelo.setValueAt(tokenTipo27, a1-1,3);
+                        }
                     //inf[1]= "cadena";
                     inf[0]="14";                  
                     inf[1]=tokenTipo27;   
