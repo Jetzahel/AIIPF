@@ -5,10 +5,12 @@ public class LiFo_Pila {
       int a=1;
     public class Nodo{ // private
         int info;
+        int linea;
         Nodo siguiente;
     
-    public Nodo(int I){
+    public Nodo(int I, int l){
         info=I;
+        linea=l;
         siguiente=null;
     }
     
@@ -23,15 +25,15 @@ public class LiFo_Pila {
     public boolean pila_vacia(){ // private
         return inicio==null;
     }
-    public void Insertar(int dato){
+    public void Insertar(int dato, int l){
         Nodo Nuevo;
         if(pila_vacia()){
-            inicio=new Nodo(dato);
+            inicio=new Nodo(dato, l);
             Recorre=inicio;
         }
         else
         {
-            Nuevo = new Nodo(dato);
+            Nuevo = new Nodo(dato,l);
             Nuevo.siguiente=inicio;
             inicio=Nuevo;
             Nuevo=null;

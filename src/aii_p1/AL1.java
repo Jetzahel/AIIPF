@@ -112,7 +112,7 @@ public class AL1 {
                     }
                break;
                case 3:                                   
-                       row("20","identificador",cadenacom,linea);
+                       row("30","identificador",cadenacom,linea);
                break;
                case 4:
                    
@@ -130,25 +130,23 @@ public class AL1 {
                               + "|(\\d+)"//8
                               + "|(\\{)"//9
                               + "|(\\})"//10
-                              + "|(\\[)"//11
-                              + "|(\\])"//12
+                              + "|(\\()"//11
+                              + "|(\\))"//12
                               + "|(<)"//13
                               + "|(>)"
                               + "|(;)"//15
                               + "|(=)"
                               + "|(\\+)"
                               + "|(-)"
-                              + "|(\\*)"//20
-                              + "|(/)"
+                              + "|(\\*)"//
+                              + "|(/)"//20
                               + "|(si)"
                               + "|(cont)"
                               + "|(num)"
                               + "|(cad)"
-                              + "|(imp)"
-                              + "|([^\\s=<>';\\(\\)])"
-                              + "|('[\\s\\w.]*')"//
-                              + "|(\\()"
-                              + "|(\\))"); 
+                              + "|(imp)"//25
+                              + "|([^\\s=<>';\\(\\)])"//26
+                              + "|('[\\s\\w.]*')"); //29
             
                 Pattern p = Pattern.compile(patron);             
                 Matcher mat = p.matcher(t);   
@@ -158,7 +156,7 @@ public class AL1 {
 
                 String tokenTipo2 = mat.group(2);//contiden
                     if(tokenTipo2 != null){
-                        inf[0]="20"; 
+                        inf[0]="30"; 
                         //inf[1]= "identificador";                                     
                         inf[1]=tokenTipo2;
                         inf[2]=String.valueOf(linea);
@@ -167,7 +165,8 @@ public class AL1 {
                     
                 String tokenTipo3 = mat.group(3);//identificador
                     if(tokenTipo3 != null){
-                        inf[0]="20"; 
+ 
+                        inf[0]="30"; 
                         //inf[1]= "identificador";                                     
                         inf[1]=tokenTipo3;
                         inf[2]=String.valueOf(linea);
@@ -176,7 +175,7 @@ public class AL1 {
                 
                 String tokenTipo4 = mat.group(4);//identificador
                     if(tokenTipo4 != null){
-                        inf[0]="20"; 
+                        inf[0]="30"; 
                         //inf[1]= "identificador";                                     
                         inf[1]=mat.group(4);
                         inf[2]=String.valueOf(linea);
@@ -185,7 +184,7 @@ public class AL1 {
                     
                 String tokenTipo5 = mat.group(5);//identificador
                     if(tokenTipo5 != null){
-                        inf[0]="20"; 
+                        inf[0]="30"; 
                         //inf[1]= "identificador";                                     
                         inf[1]=tokenTipo5;
                         inf[2]=String.valueOf(linea);
@@ -194,7 +193,7 @@ public class AL1 {
                  
                 String tokenTipo6 = mat.group(6);//identificador
                     if(tokenTipo6 != null){
-                        inf[0]="20"; 
+                        inf[0]="30"; 
                         //inf[1]= "identificador";                                     
                         inf[1]= tokenTipo6; 
                         inf[2]=String.valueOf(linea);
@@ -213,7 +212,7 @@ public class AL1 {
                         if(IP1.modelo.getValueAt(a1, 1).equals("=") && null==IP1.modelo.getValueAt(a1-1,3)){
                            IP1.modelo.setValueAt(tokenTipo8, a1-1,3);
                         }
-                        inf[0]="21"; 
+                        inf[0]="31"; 
                         //inf[1]= "numero";                                     
                         inf[1]=tokenTipo8;
                         inf[2]=String.valueOf(linea);
@@ -238,7 +237,7 @@ public class AL1 {
                         it.llenarT(inf);                      
                 }             
                  
-                String tokenTipo11 = mat.group(11);//llave a
+                String tokenTipo11 = mat.group(11);//  (
                 if(tokenTipo11 != null){
                     //inf[1]= "corchete_abierto";
                     inf[0]="22";                                   
@@ -247,7 +246,7 @@ public class AL1 {
                     it.llenarT(inf);               
                 }
                 
-                String tokenTipo12 = mat.group(12);//llave c
+                String tokenTipo12 = mat.group(12);// )
                 if(tokenTipo12 != null){
                     //inf[1]= "corchete_cerrado";
                     inf[0]="23";
@@ -278,7 +277,7 @@ public class AL1 {
                 String tokenTipo15 = mat.group(15);//;
                 if(tokenTipo15 != null){
                     //inf[1]= "delimitador";
-                    inf[0]="52";
+                    inf[0]="50";
                     inf[1]=tokenTipo15;  
                     inf[2]=String.valueOf(linea);
                     it.llenarT(inf);                   
@@ -339,7 +338,7 @@ public class AL1 {
                     it.llenarT(inf);                   
                 }
                  
-                String tokenTipo22 = mat.group(22);//)
+                String tokenTipo22 = mat.group(22);//
                 if(tokenTipo22 != null){
                     //inf[1]= "palabra_r";
                     inf[0]="11";                  
@@ -350,6 +349,7 @@ public class AL1 {
                 
                 String tokenTipo23 = mat.group(23);//;
                 if(tokenTipo23 != null){
+                  
                     //inf[1]= "palabra_r";
                     inf[0]="12";                  
                     inf[1]=tokenTipo23;
@@ -388,26 +388,8 @@ public class AL1 {
                            IP1.modelo.setValueAt(tokenTipo27, a1-1,3);
                         }
                     //inf[1]= "cadena";
-                    inf[0]="14";                  
+                    inf[0]="32";                  
                     inf[1]=tokenTipo27;   
-                    inf[2]=String.valueOf(linea);
-                    it.llenarT(inf);
-                }
-                
-                String tokenTipo28 = mat.group(28);//=
-                if(tokenTipo28 != null){
-                    //inf[1]= "parentecis";
-                    inf[0]="24";                  
-                    inf[1]=tokenTipo28;   
-                    inf[2]=String.valueOf(linea);
-                    it.llenarT(inf);
-                }
-                
-                String tokenTipo29 = mat.group(29);//=
-                if(tokenTipo29 != null){
-                    //inf[1]= "parentecis";
-                    inf[0]="25";                  
-                    inf[1]=tokenTipo29;   
                     inf[2]=String.valueOf(linea);
                     it.llenarT(inf);
                 }
@@ -446,6 +428,7 @@ public class AL1 {
                 ide = 102;
                 IP1.mme.setText(cad+" Error "+ide+"\n Se econtro un caracter que no pertenece al lenguaje,  en la linea "+l+"\n"); 
                 break;
+            
         }    
     }
 }

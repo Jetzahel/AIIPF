@@ -6,14 +6,13 @@
 package aii_p1;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -169,6 +168,11 @@ public class IP1 extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Ayuda");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -250,7 +254,8 @@ public class IP1 extends javax.swing.JFrame {
                  "\nNo se ha encontrado el archivo",
                        "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
           }
-        
+           
+        nul();
         alb.setEnabled(true);
     }//GEN-LAST:event_abrirMouseClicked
 
@@ -293,22 +298,22 @@ public class IP1 extends javax.swing.JFrame {
 
     private void areatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyPressed
         // TODO add your handling code here:    
+        nul();
+    }//GEN-LAST:event_areatKeyPressed
+
+    public void nul(){
         nl.setText("");
         for (int i = 1; i <= areat.getLineCount(); i++) {
             nl.append(i+"\n");
         }
-    }//GEN-LAST:event_areatKeyPressed
-
+    }
     private void areatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyTyped
         // TODO add your handling code here:    
     }//GEN-LAST:event_areatKeyTyped
 
     private void areatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areatKeyReleased
         // TODO add your handling code here:
-        nl.setText("");
-        for (int i = 1; i <= areat.getLineCount(); i++) {
-            nl.append(i+"\n");
-        }
+        nul();
         if(areat.getSelectionStart()==0){
             
             alb.setEnabled(false);           
@@ -320,7 +325,26 @@ public class IP1 extends javax.swing.JFrame {
     private void asbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_asbMouseClicked
         // TODO add your handling code here:
         as.llenarP();
+        if(mme.getText().equals("")){
+            asb.setForeground(Color.GREEN);
+            
+        }else{
+            asb.setForeground(Color.RED);
+        } 
+        
     }//GEN-LAST:event_asbMouseClicked
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+
+try {
+     File path = new File ("doc/doc.pdf");
+     Desktop.getDesktop().open(path);
+}catch (IOException ex) {
+     ex.printStackTrace();
+}
+
+    }//GEN-LAST:event_jMenu3MouseClicked
 
     
     /**
