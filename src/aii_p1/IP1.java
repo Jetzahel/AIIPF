@@ -7,10 +7,12 @@ package aii_p1;
 
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,17 +26,34 @@ public class IP1 extends javax.swing.JFrame {
     AL1 al1 = new AL1();
     AS as = new AS();
     Tabla it = new Tabla();
+    ImageIcon albv=new ImageIcon("icon/albv.png");
+    ImageIcon albr=new ImageIcon("icon/albr.png");
+    ImageIcon alba=new ImageIcon("icon/alba.png");
+    ImageIcon asba=new ImageIcon("icon/asba.png");
+    ImageIcon asbv=new ImageIcon("icon/asbv.png");
+    ImageIcon asbr=new ImageIcon("icon/asbr.png");
+    ImageIcon aseba=new ImageIcon("icon/aseba.png");
+    ImageIcon asebv=new ImageIcon("icon/asebv.png");
+    ImageIcon asebr=new ImageIcon("icon/asebr.png");
+    
 
     static DefaultTableModel modelo = new DefaultTableModel();
     
     public IP1() {
+       
         initComponents();   
         modelo.setColumnIdentifiers(new Object [] {"idToken", "Lexema","Linea","Valor"}); 
         tabla.setModel(modelo);    
         tabla.setEnabled(false);
-        nl.append("1");
+        nl.append("1");      
         alb.setEnabled(false);
+        alb.setIcon(alba);
+        asb.setIcon(asba);
         asb.setEnabled(false);
+        aseb.setIcon(aseba);
+        aseb.setEnabled(false);
+        
+       // alb.setIcon(alba);
     }
 
     /**
@@ -57,6 +76,7 @@ public class IP1 extends javax.swing.JFrame {
         asb = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         nl = new javax.swing.JTextArea();
+        aseb = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         nuevo = new javax.swing.JMenuItem();
@@ -71,8 +91,8 @@ public class IP1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        alb.setForeground(new java.awt.Color(255, 255, 51));
-        alb.setText("Análisis léxico");
+        alb.setBorder(null);
+        alb.setMargin(new java.awt.Insets(0, 0, 0, 0));
         alb.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 albMouseClicked(evt);
@@ -86,6 +106,8 @@ public class IP1 extends javax.swing.JFrame {
 
         areat.setColumns(20);
         areat.setRows(5);
+        areat.setAlignmentX(0.0F);
+        areat.setAlignmentY(0.0F);
         areat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 areatKeyTyped(evt);
@@ -115,7 +137,9 @@ public class IP1 extends javax.swing.JFrame {
         mme.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane3.setViewportView(mme);
 
-        asb.setText("Análisis Sintáctico");
+        asb.setBorder(null);
+        asb.setBorderPainted(false);
+        asb.setMargin(new java.awt.Insets(0, 0, 0, 0));
         asb.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 asbMouseClicked(evt);
@@ -128,6 +152,15 @@ public class IP1 extends javax.swing.JFrame {
         nl.setBorder(null);
         nl.setFocusable(false);
         jScrollPane4.setViewportView(nl);
+
+        aseb.setBorder(null);
+        aseb.setBorderPainted(false);
+        aseb.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        aseb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                asebMouseClicked(evt);
+            }
+        });
 
         jMenu2.setText("Archivo");
 
@@ -182,40 +215,47 @@ public class IP1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(asb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(alb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(asb, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alb, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aseb, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(alb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(asb))
+                        .addComponent(jScrollPane2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane4)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(alb, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(asb, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(aseb, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -282,17 +322,19 @@ public class IP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void albActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_albActionPerformed
+        it.limpiaTabla();
         mme.setText("");
         it.limpiaTabla();
         al1.generarTokens(leer());
         
         if(mme.getText().equals("")){
-            alb.setForeground(Color.GREEN);
+            alb.setIcon(albv);
             asb.setEnabled(true);
-            alb.setBackground(Color.red);
+            asb.setIcon(asba);
         }else{
+            alb.setIcon(albr);
             asb.setEnabled(false);
-            alb.setForeground(Color.RED);
+           
         }      
     }//GEN-LAST:event_albActionPerformed
 
@@ -301,8 +343,10 @@ public class IP1 extends javax.swing.JFrame {
         nul();
     }//GEN-LAST:event_areatKeyPressed
 
-    public void nul(){
+    public void nul(){  
         nl.setText("");
+        alb.setIcon(alba);
+        asb.setEnabled(false);
         for (int i = 1; i <= areat.getLineCount(); i++) {
             nl.append(i+"\n");
         }
@@ -315,7 +359,6 @@ public class IP1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         nul();
         if(areat.getSelectionStart()==0){
-            
             alb.setEnabled(false);           
         }else if(areat.getSelectionStart()!=0){
             alb.setEnabled(true);
@@ -326,10 +369,10 @@ public class IP1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         as.llenarP();
         if(mme.getText().equals("")){
-            asb.setForeground(Color.GREEN);
+            asb.setIcon(albv);
             
         }else{
-            asb.setForeground(Color.RED);
+            asb.setIcon(asbr);
         } 
         
     }//GEN-LAST:event_asbMouseClicked
@@ -346,6 +389,10 @@ try {
 
     }//GEN-LAST:event_jMenu3MouseClicked
 
+    private void asebMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_asebMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_asebMouseClicked
+
     
     /**
      * @param args the command line arguments
@@ -357,6 +404,7 @@ try {
     public static javax.swing.JButton alb;
     public static javax.swing.JTextArea areat;
     private static javax.swing.JButton asb;
+    private static javax.swing.JButton aseb;
     private javax.swing.JMenu guardarc;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

@@ -64,25 +64,32 @@ public class AL1 {
                     }
     }
     
+    int Estado;
     public void generarTokens(String data){
         
         int a1=0, a2=0;   
         StringTokenizer st = new StringTokenizer(data,"\n");
-        int linea=1;
+        int linea=0;
         
         while(st.hasMoreTokens()){
-                 
-            StringTokenizer stc = new StringTokenizer(st.nextToken());
+                 String t1 = st.nextToken();
+                 if(t1.contains("//")){
+                     linea++;
+                    
+                }else{
+                     linea++;
+                
+            StringTokenizer stc = new StringTokenizer(t1);
             
             while(stc.hasMoreTokens()){
                 int te;
-                String t = stc.nextToken();//forma un token con cada espacio
+                String t = stc.nextToken();//forma un token con cada espacio 
                 
-                
+               
                String  cadenacom = "";      
-                int Estado=0;
+                Estado=0;
               
-       for(int indice=0;indice<t.length();indice++){
+        for(int indice=0;indice<t.length();indice++){
            char letra = t.charAt(indice);
           
            switch (Estado){
@@ -115,10 +122,11 @@ public class AL1 {
                        row("30","identificador",cadenacom,linea);
                break;
                case 4:
-                   
+                   Estado=0;
                break;
-            }
-            }                 
+            }// fin Switch
+        }//fin for
+                        
                               
                 String patron = ("(si[a-zA-Z]*\\d+)"//1
                               + "|(cont[a-zA-Z]*\\d+)"//2
@@ -136,22 +144,21 @@ public class AL1 {
                               + "|(>)"
                               + "|(;)"//15
                               + "|(=)"
-                              + "|(\\+)"
+                              + "|(\\+)"//17
                               + "|(-)"
                               + "|(\\*)"//
                               + "|(/)"//20
-                              + "|(si)"
+                              + "|(si)"//21
                               + "|(cont)"
                               + "|(num)"
                               + "|(cad)"
                               + "|(imp)"//25
                               + "|([^\\s=<>';\\(\\)])"//26
-                              + "|('[\\s\\w.]*')"); //29
+                              + "|('[\\s\\w.]*')"); //27
             
                 Pattern p = Pattern.compile(patron);             
                 Matcher mat = p.matcher(t);   
-                
-       
+                      int cont=1;
             while(mat.find()){
 
                 String tokenTipo2 = mat.group(2);//contiden
@@ -320,13 +327,13 @@ public class AL1 {
                     it.llenarT(inf);                   
                 }
                 
-                String tokenTipo20 = mat.group(20);//  div
-                if(tokenTipo20 != null){
-                    //inf[1]= "operador_div";
+                String tokenTipo20 = mat.group(20);//  div /
+                if(tokenTipo20 != null){ 
                     inf[0]="46";
                     inf[1]=tokenTipo20;  
                     inf[2]=String.valueOf(linea);
-                    it.llenarT(inf);                  
+                    it.llenarT(inf);
+                               
                 }
                
                 String tokenTipo21 = mat.group(21);//si
@@ -334,8 +341,9 @@ public class AL1 {
                     //inf[1]= "palabra_r";
                     inf[0]="10";
                     inf[1]=tokenTipo21;
-                    inf[2]=String.valueOf(linea);
-                    it.llenarT(inf);                   
+                    inf[2]=String.valueOf(linea);              
+                    it.llenarT(inf);  
+                     //linea--;
                 }
                  
                 String tokenTipo22 = mat.group(22);//
@@ -394,11 +402,17 @@ public class AL1 {
                     it.llenarT(inf);
                 }
             }
-            
+             
             }
-            linea ++;
-        }      
+            
+        }
+                 
+        } 
+       
     }
+    
+  
+    
     
     public void row(String p1,String p2,String p3, int p4){
                     inf[0]=p1;

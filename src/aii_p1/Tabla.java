@@ -28,7 +28,8 @@ public class Tabla {
         
     }
     
-    public void buscarT(){
+    public void buscarT(String db){//datobuscado
+        
         
     }
     
