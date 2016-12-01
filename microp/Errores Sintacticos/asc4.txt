@@ -1,0 +1,14 @@
+//El siguiente programa verifica el caso de uso numero 4
+//para el analizador sintático que verifica que si existe
+//una condición si este correctamente formulada.
+num var1=0;
+si
+si (
+si (var1
+num var2=3;
+si (var1<
+si (var1<9
+si (var1<9)
+si (var1<9){
+si (var1<9){
+}

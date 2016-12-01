@@ -1,0 +1,18 @@
+//El siguiente programa verifica el caso de uso numero 3
+//para el analizador sintático que verifica que al momento
+//de declarar una cadena lo haga correctamente.
+num v0=9;
+cad 
+num v5;
+num var1=9;
+cad v1
+num var2;
+cad p1=
+var2+9;
+num var3=9;
+cad p2='d'
+num ent0;
+cad 
+num var2;
+cad p2=
+num var2=9;

@@ -1,0 +1,33 @@
+//El siguiente programa verifica el caso de uso número 2
+//para el analizador léxico que verifica que todos los
+//símbolos escritos en el programa fuente pertenezcan al
+//lenguaje.
+<?php0
+num var7;
+si &(var1 0>0){
+cad palabra0 = 'lopez';
+};
+;
+@gar0
+var1
+$cad
+cad
+cont0
+num
+<
+&=
+gatos1000
+.
+si
+>
+cont
+javier0
+imp
++
+@cad
+*%
+/
+-_
+lucas9
+&{
+?>

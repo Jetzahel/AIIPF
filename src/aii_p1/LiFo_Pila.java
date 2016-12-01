@@ -1,6 +1,5 @@
 package aii_p1;
 
-
 public class LiFo_Pila {
       int a=1;
     public class Nodo{ // private
@@ -12,8 +11,7 @@ public class LiFo_Pila {
         info=I;
         linea=l;
         siguiente=null;
-    }
-    
+     }   
     } //clase Nodo
     
     public Nodo inicio,Recorre; //private
@@ -40,13 +38,9 @@ public class LiFo_Pila {
         }
     }
     public int Eliminar(){
-        
-
         if(!pila_vacia()){
             temporal =inicio.info;
-            inicio=inicio.siguiente;
-            
-            
+            inicio=inicio.siguiente;        
         }
         return temporal;
     }
@@ -54,8 +48,7 @@ public class LiFo_Pila {
      public void VaciarPila()
     {
        while (pila_vacia()==false){
-           Eliminar();
-           
+           Eliminar();         
        }
         
     }

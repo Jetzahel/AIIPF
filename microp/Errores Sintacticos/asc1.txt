@@ -1,0 +1,14 @@
+//El siguiente programa verifica el caso de uso numero 1
+//para el analizador sintático que verifica que al momento
+//de declarar un entero lo haga correctamente.
+num v0=9;
+cad p0='hola';
+num 
+num var1
+cad v1='tello';
+num var2=
+cad p1='ciclo';
+num var3=9
+cad p2='d';
+num
+num var2

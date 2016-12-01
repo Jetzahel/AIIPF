@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package aii_p1;
+import java.awt.Color;
 import java.io.*;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -71,13 +72,15 @@ public class AL1 {
         StringTokenizer st = new StringTokenizer(data,"\n");
         int linea=0;
         
+        
         while(st.hasMoreTokens()){
+            linea++;
                  String t1 = st.nextToken();
                  if(t1.contains("//")){
-                     linea++;
+                     
                     
                 }else{
-                     linea++;
+                     
                 
             StringTokenizer stc = new StringTokenizer(t1);
             
@@ -134,7 +137,7 @@ public class AL1 {
                               + "|(cad[a-zA-Z]*\\d+)"//4
                               + "|(imp[a-zA-Z]*\\d+)"//5
                               + "|([a-zA-Z]+\\d+)"//6
-                              + "|(\\d+[;.,]\\d+)"//7
+                              + "|(\\d+[;.,]\\d+[;.,]*\\d*)"//7
                               + "|(\\d+)"//8
                               + "|(\\{)"//9
                               + "|(\\})"//10
@@ -153,12 +156,12 @@ public class AL1 {
                               + "|(num)"
                               + "|(cad)"
                               + "|(imp)"//25
-                              + "|([^\\s=<>';\\(\\)])"//26
-                              + "|('[\\s\\w.]*')"); //27
+                              + "|([@&%?_.])"//26  ([^\\s=<>';.\\(\\)])
+                              + "|('[\\s\\w.]*')"
+                              + "|([a-zA-Z]+)"); //28
             
                 Pattern p = Pattern.compile(patron);             
                 Matcher mat = p.matcher(t);   
-                      int cont=1;
             while(mat.find()){
 
                 String tokenTipo2 = mat.group(2);//contiden
@@ -304,7 +307,7 @@ public class AL1 {
                 if(tokenTipo17 != null){
                     //inf[1]= "operador_suma";
                     inf[0]="43";
-                    inf[1]=tokenTipo16;
+                    inf[1]=tokenTipo17;
                     inf[2]=String.valueOf(linea);
                     it.llenarT(inf);
                 }
@@ -319,7 +322,7 @@ public class AL1 {
                 }
                  
                 String tokenTipo19 = mat.group(19);//*
-                if(tokenTipo18 != null){
+                if(tokenTipo19 != null){
                     //inf[1]= "operador_mult";
                     inf[0]="45";
                     inf[1]=tokenTipo19;
@@ -385,13 +388,12 @@ public class AL1 {
                 
                 String tokenTipo26 = mat.group(26);//=
                 if(tokenTipo26 != null){
-                    te = 1;                     
+                    te = 2;                     
                         manejoErrores(t, linea, te);
                 }
                 
                 String tokenTipo27 = mat.group(27);//=
-                if(tokenTipo27 != null){
-                    
+                if(tokenTipo27 != null){                   
                     if(IP1.modelo.getValueAt(a1, 1).equals("=") && null==IP1.modelo.getValueAt(a1-1,3)){
                            IP1.modelo.setValueAt(tokenTipo27, a1-1,3);
                         }
@@ -400,6 +402,11 @@ public class AL1 {
                     inf[1]=tokenTipo27;   
                     inf[2]=String.valueOf(linea);
                     it.llenarT(inf);
+                }
+                String tokenTipo28 = mat.group(28);//=
+                if(tokenTipo28 != null){                   
+                    te = 1;                     
+                        manejoErrores(t, linea, te);
                 }
             }
              
@@ -428,15 +435,15 @@ public class AL1 {
         int ide;//id del error
         String cad = IP1.mme.getText();
         
+        IP1.mme.setForeground(Color.red);
         switch(r){
             case 0:
                 ide = 100;
-                IP1.mme.setText(cad+" Error "+ide+"\n Se econtro un numero no valido,  en la linea "+l+"\n");             
-                
+                IP1.mme.setText(cad+" Error "+ide+"\n Se econtro un numero no valido,  en la linea "+l+"\n");                             
                 break;
             case 1:
                 ide = 101;
-                IP1.mme.setText(cad+" Error "+ide+"\n Se econtro un caracter que no pertenece al lenguaje,  en la linea "+l+"\n"); 
+                IP1.mme.setText(cad+" Error "+ide+"\n Símbolo no reconocido,  en la linea "+l+"\n"); 
                 break;
             case 2:
                 ide = 102;

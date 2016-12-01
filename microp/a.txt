@@ -1,8 +1,0 @@
-//El siguiente programa verifica el caso de uso numero 1º
-//para el analizador léxico 
-//
-num var0=9.0;
-si    (var0 > 0){
-num palabra0 = 9;
-}
-var0=7+9,4;

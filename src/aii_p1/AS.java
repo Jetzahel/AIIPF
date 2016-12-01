@@ -5,48 +5,146 @@
  */
 package aii_p1;
 
+import java.awt.Color;
+
 /**
  *
  * @author Joel
  */
 public class AS {
     LiFo_Pila lf = new LiFo_Pila();
-
+     int dat,line, error;
+     int Estado,Estadosi,Estadocont,Estadoo;
     
     public void llenarP(){
-        lf.Insertar(1,1);  
-        
+        lf.Insertar(1,1);       
         for (int i=IP1.modelo.getRowCount()-1; i >= 0; i--) {
             int dato = Integer.valueOf((String) IP1.modelo.getValueAt(i,0));
             int li = Integer.valueOf((String) IP1.modelo.getValueAt(i,2));
             lf.Insertar(dato,li);           
         }
-        leerP();
-        
-    }
-    int dat,line, error;
-    int Estado,Estadosi,Estadocont;
+        leerP();       
+    }// fin llenar Pila
+   
     
-    public void leerP(){      
-        int row = IP1.modelo.getRowCount();
+    public void leerP(){ 
+        
+        try {
+            int row = IP1.modelo.getRowCount();
         int liz = Integer.valueOf((String) IP1.modelo.getValueAt(row-1,2));
-
+        System.out.println(liz);
         for (int i=liz; i>0 ;i--) {
             Estado=0;
             Estadosi=0;
             Estadocont=0;
-            
-            num(Estado);
-            cad(Estado);
-            si(Estadosi);
-            cont(Estadocont);
-                //__________________________________si___________________________-
-                
-                
-             
+            Estadoo=0;
+            System.out.println(lf.inicio.info);
+            int dato=lf.inicio.info;
+            switch(dato){
+                case 12://num
+                    num(Estado);
+                break;
+                case 30://iden
+                    op(Estadoo);
+                break;
+                case 13://cad
+                    cad(Estado);
+                break;
+                case 10:
+                    si(Estadosi);
+                break;
+                case 11:
+                    cont(Estadocont);
+                break;                    
+            }           
+                //__________________________________si___________________________-            
         }//fin for que recorre la pila 
+            
+        } catch (Exception e) {
+        }
+        
         
     }//fin leerP();
+    
+    public void op(int Estadoo){
+        switch (Estadoo){
+                   case 0:                     
+                       dat =lf.inicio.info;
+                       if(dat == 30){// Cont
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
+                           op(Estadoo=1);                          
+                       }
+                   break;
+                   case 1:                     
+                       dat =lf.inicio.info;
+                       if(dat == 42){// =
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
+                           op(Estadoo=2);
+                       }else{
+                           error=13;
+                           op(Estadoo=7);                         
+                       }
+                   break;
+                   case 2:                     
+                       dat =lf.inicio.info;
+                       if(dat == 30||dat==31){// (
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
+                           op(Estadoo=3);
+                       }else{
+                           error=12;
+                           op(Estadoo=7);                         
+                       }
+                   break;
+                   case 3:                     
+                       dat =lf.inicio.info;
+                       if(dat == 43||dat==44||dat==45||dat==46){// (
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
+                           op(Estadoo=4);
+                       }else if(dat == 50){
+                           lf.Eliminar();
+                           op(Estadoo=6);
+                       }else{
+                           error=17;
+                           op(Estadoo=7);                         
+                       }
+                   break;
+                   case 4:                     
+                       dat =lf.inicio.info;
+                       if(dat == 30||dat==31){// (
+                           if(lf.inicio.linea==line){
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
+                           op(Estadoo=5);
+                           }
+                       }else{
+                           error=12;
+                           op(Estadoo=7);                         
+                       }
+                   break;
+                   case 5:                     
+                       dat =lf.inicio.info;
+                       if(dat == 50){// (
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
+                           op(Estadoo=6);
+                       }else{
+                           error=3;
+                           op(Estadoo=7);                         
+                       }
+                   break;
+                   case 6:                     
+                       Estadoo=0;
+                   break;    
+                   case 7:                     
+                       Estadoo = 0;
+                       manejoErrores(line, error);
+                   break; 
+        }
+    }
     
     public void cont(int Estadocont){
         switch (Estadocont){
@@ -196,6 +294,7 @@ public class AS {
                            error=0;
                            cont(Estadocont=15);
                        }
+                      
                    break;
                    case 12:
                        dat =lf.inicio.info;
@@ -264,21 +363,10 @@ public class AS {
                        }else if(dat == 21){// }
                            line= lf.inicio.linea;
                            lf.Eliminar();
-                           cont(Estadocont=17);
+                           cont(Estadocont=18);
                          }else{                         
                            error = 11 ;
                            si(Estadosi=10); 
-                       }
-                   break;
-                   case 17:
-                       dat=lf.inicio.info;
-                       if(dat==50){
-                           line= lf.inicio.linea;
-                           lf.Eliminar();
-                           cont(Estadocont=18);
-                       }else{
-                           error=3;
-                           cont(Estadocont=15);
                        }
                    break;
                    case 18:                      
@@ -333,11 +421,11 @@ public class AS {
                                si(Estadosi=4);
                            }else{
                                error = 7;
-                           si(Estadosi =10);
+                           si(Estadosi=10);
                            }
                        }else{
                            error = 7;
-                           si(Estadosi =10);                     
+                           si(Estadosi=10);                     
                        }
                    break;
                    case 4:
@@ -384,20 +472,9 @@ public class AS {
                            cad(Estado=0);
                            si(Estadosi=7);
                        }else if(dat == 21){// }
-                           si(Estadosi=8);
+                           si(Estadosi=9);
                          }else{                         
                            error = 11 ;
-                           si(Estadosi=10); 
-                       }
-                   break;
-                   case 8:
-                       line= lf.inicio.linea;
-                       lf.Eliminar();                      
-                       dat = lf.inicio.info;
-                       if(dat == 50){// ;
-                           si(Estadosi=9);
-                       }else{
-                           error = 3 ;
                            si(Estadosi=10); 
                        }
                    break;
@@ -416,58 +493,61 @@ public class AS {
         switch (Estado){
                    case 0:                     
                        dat =lf.inicio.info;
-                       if(dat == 12){//num   
+                       if(dat == 12){//num 
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
                            num(Estado=1);
                        }
                    break;
-                   case 1:
-                       line= lf.inicio.linea;
-                       lf.Eliminar();                      
-                       dat = lf.inicio.info;
-                      
+                   case 1:                                           
+                       dat = lf.inicio.info;                     
                        if(dat == 30){//identificador
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
                            num(Estado=2);
                        }else{
                            error = 0; 
                            num(Estado=6);
                        }
                    break;
-                   case 2:
-                        line= lf.inicio.linea;
-                       lf.Eliminar();                      
+                   case 2:                                             
                        dat = lf.inicio.info;                     
                        if(dat == 42){//=
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
                            num(Estado=3);
                        }else if(dat==50){//;
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
                            num(Estado=5);
                        }else{                         
                            error = 1;
                            num(Estado=6);
                         }
                    break;
-                   case 3:
-                       lf.Eliminar();                      
+                   case 3:                      
                        dat = lf.inicio.info;                    
-                       if(dat == 31){// numero
+                       if(dat == 31 || dat == 32){// numero
+                           line= lf.inicio.linea;
+                           lf.Eliminar();
                            num(Estado=4);
                        }else{
                            error = 2;
                            num(Estado=6);
                        }
                    break;
-                   case 4:
-                       lf.Eliminar();                      
+                   case 4:                      
                        dat = lf.inicio.info;
                        if(dat == 50){// ;
+                           lf.Eliminar();
                            num(Estado=5);
                        }else{
                            error = 3;
                            num(Estado=6);
                        }
                    break;
-                   case 5:
-                       lf.Eliminar(); 
-                       Estado = 0;                     
+                   case 5:                      
+                       Estado = 0;                      
                    break;
                    case 6:
                        Estado = 0;
@@ -512,7 +592,7 @@ public class AS {
                        line= lf.inicio.linea;
                        lf.Eliminar();                      
                        dat = lf.inicio.info;                       
-                       if(dat == 32){// cadena
+                       if(dat == 32 || dat== 31){// cadena
                            cad(Estado=4);
                        }else{
                            error = 4;
@@ -543,7 +623,8 @@ public class AS {
     
     public void manejoErrores(int l, int r){
         int ide;//id del error
-        String cad = IP1.mme.getText();     
+        String cad = IP1.mme.getText();   
+        IP1.mme.setForeground(Color.red);
         switch(r){
             case 0:
                 ide = 200;
@@ -594,7 +675,7 @@ public class AS {
                 IP1.mme.setText(cad+" Error7 "+ide+"\n Se esperaba un },  en la linea "+l+"\n"); 
                 break;
             case 12:
-                ide = 204;
+                ide = 212;
                 IP1.mme.setText(cad+" Error8 "+ide+"\n Se esperaba un num o un identificador ,  en la linea "+l+"\n"); 
                 break;
             case 13:
@@ -613,7 +694,10 @@ public class AS {
                 ide = 216;
                 IP1.mme.setText(cad+" Error "+ide+"\n Se esperaba un INC ó DEC ,  en la linea "+l+"\n"); 
                 break;
-            
+            case 17:
+                ide = 217;
+                IP1.mme.setText(cad+" Error "+ide+"\n Se esperaba un operador aritmetico ó un ; ,  en la linea "+l+"\n"); 
+                break;           
         }    
     }//Fin manejoErr
     

@@ -5,9 +5,7 @@
  */
 package aii_p1;
 
-import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -35,12 +33,10 @@ public class IP1 extends javax.swing.JFrame {
     ImageIcon aseba=new ImageIcon("icon/aseba.png");
     ImageIcon asebv=new ImageIcon("icon/asebv.png");
     ImageIcon asebr=new ImageIcon("icon/asebr.png");
-    
-
+    ImageIcon pbv=new ImageIcon("icon/pb.png");
     static DefaultTableModel modelo = new DefaultTableModel();
     
     public IP1() {
-       
         initComponents();   
         modelo.setColumnIdentifiers(new Object [] {"idToken", "Lexema","Linea","Valor"}); 
         tabla.setModel(modelo);    
@@ -52,8 +48,8 @@ public class IP1 extends javax.swing.JFrame {
         asb.setEnabled(false);
         aseb.setIcon(aseba);
         aseb.setEnabled(false);
-        
-       // alb.setIcon(alba);
+        pb.setIcon(pbv);
+        pb.setEnabled(false);
     }
 
     /**
@@ -77,6 +73,8 @@ public class IP1 extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         nl = new javax.swing.JTextArea();
         aseb = new javax.swing.JButton();
+        pb = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         nuevo = new javax.swing.JMenuItem();
@@ -90,6 +88,7 @@ public class IP1 extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
         alb.setBorder(null);
         alb.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -162,6 +161,22 @@ public class IP1 extends javax.swing.JFrame {
             }
         });
 
+        pb.setBorder(null);
+        pb.setBorderPainted(false);
+        pb.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        pb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pbMouseClicked(evt);
+            }
+        });
+        pb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pbActionPerformed(evt);
+            }
+        });
+
+        jSeparator3.setBackground(new java.awt.Color(102, 102, 102));
+
         jMenu2.setText("Archivo");
 
         nuevo.setText("Nuevo");
@@ -217,18 +232,22 @@ public class IP1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(asb, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(alb, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(aseb, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(aseb, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(pb, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -248,8 +267,12 @@ public class IP1 extends javax.swing.JFrame {
                                 .addComponent(asb, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(aseb, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
+                                .addComponent(pb, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 353, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane4)
@@ -294,9 +317,9 @@ public class IP1 extends javax.swing.JFrame {
                  "\nNo se ha encontrado el archivo",
                        "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
           }
-           
         nul();
         alb.setEnabled(true);
+        pb.setEnabled(true);
     }//GEN-LAST:event_abrirMouseClicked
 
     public String leer(){
@@ -324,17 +347,15 @@ public class IP1 extends javax.swing.JFrame {
     private void albActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_albActionPerformed
         it.limpiaTabla();
         mme.setText("");
-        it.limpiaTabla();
         al1.generarTokens(leer());
-        
+        pb.setEnabled(false);
         if(mme.getText().equals("")){
             alb.setIcon(albv);
             asb.setEnabled(true);
             asb.setIcon(asba);
         }else{
             alb.setIcon(albr);
-            asb.setEnabled(false);
-           
+            asb.setEnabled(false);  
         }      
     }//GEN-LAST:event_albActionPerformed
 
@@ -362,6 +383,7 @@ public class IP1 extends javax.swing.JFrame {
             alb.setEnabled(false);           
         }else if(areat.getSelectionStart()!=0){
             alb.setEnabled(true);
+            pb.setEnabled(true);
         }
     }//GEN-LAST:event_areatKeyReleased
 
@@ -369,17 +391,15 @@ public class IP1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         as.llenarP();
         if(mme.getText().equals("")){
-            asb.setIcon(albv);
-            
+            asb.setIcon(asbv);
+            aseb.setEnabled(true);            
         }else{
             asb.setIcon(asbr);
-        } 
-        
+        }         
     }//GEN-LAST:event_asbMouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         // TODO add your handling code here:
-
 try {
      File path = new File ("doc/doc.pdf");
      Desktop.getDesktop().open(path);
@@ -393,12 +413,23 @@ try {
         // TODO add your handling code here:
     }//GEN-LAST:event_asebMouseClicked
 
-    
+    private void pbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pbMouseClicked
+        // TODO add your handling code here:
+        it.limpiaTabla();
+        mme.setText("");
+        alb.setEnabled(false);
+        al1.generarTokens(leer());
+        as.llenarP();
+        
+    }//GEN-LAST:event_pbMouseClicked
+
+    private void pbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pbActionPerformed
+
     /**
      * @param args the command line arguments
      */
-   
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu abrir;
     public static javax.swing.JButton alb;
@@ -417,9 +448,11 @@ try {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     static javax.swing.JTextArea mme;
     static javax.swing.JTextArea nl;
     private javax.swing.JMenuItem nuevo;
+    private static javax.swing.JButton pb;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

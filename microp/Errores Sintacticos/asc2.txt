@@ -1,0 +1,1 @@
+//El siguiente programa verifica el caso de uso numero 2//para el analizador sintático que verifica que al momento//de incluir una operación aritmética lo haga correctamente.num var1=3;num var2=2;var2 = var2+9;var2var1 =num v3= 9;v3 = 9v3 = v1v3 = 10 +num v2=0;v3 = v2 -cad c1='bote';v3 = 10 + v1v3 = v2 - 1v3 = 10 + 10;v3 = v2 - v1;

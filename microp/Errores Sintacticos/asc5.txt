@@ -1,0 +1,28 @@
+//El siguiente programa verifica el caso de uso numero 4
+//para el analizador sintático que verifica que si existe
+//una condición cont este correctamente formulada.
+num var1=0;
+cont
+cont (num
+cont (num var1
+cont (num var1=
+cont (num var1=0
+cont (num var1=0;
+cont (num var1=0;var1
+cont (num var1=0;var1<
+cont (num var1=0;var1<20
+cont (num var1=0;var1<20;
+cont (num var1 = 0;var1 < 20;var1
+cont (num var1 = 0;var1 < 20;var1+
+cont (num var1 = 0;var1 < 20;var1++
+cont (num var1 = 0;var1 < 20;var1-
+cont (num var1 = 0;var1 < 20;var1++)
+cont (num var1 = 0;var1 < 20;var1++){
+cont (num var1 = 0;var1 < 20;var1++){
+}
+cont (var1
+num var2=3;
+cont(var1 = 
+cont(var1 = 0
+si (var1<9){
+}

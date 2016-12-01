@@ -1,0 +1,21 @@
+//El siguiente programa verifica el caso de uso número 4
+//para el analizador léxico donde si el usuario escribe
+//identificadores con signos reconocidos por el lenguaje
+//sin espacios el programa separa el identificador del
+//operador y los clasifica correctamente en la tabla 
+//se símbolos.
+num var0=9;
+num var1=10;
+num var2=var1+var0;
+var2=var1-var0;
+var2=var1*var2;
+var0=var1/var1;
+si(var0 > 0){
+cad palabra0 = 'lopez';
+num var3;
+var3 = var3*2;
+var3 = 2*var3;
+};
+cont(num var1=0;var1<10;var1++){
+imp(var1);
+};

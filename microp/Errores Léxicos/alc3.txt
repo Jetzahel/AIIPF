@@ -1,0 +1,23 @@
+//El siguiente programa verifica el caso de uso número 3
+//para el analizador léxico que verifica que el usuario
+//escriba correctamente las palabras reservadas de no 
+//ser así el programa las reconocerá como símbolos no
+//encontrados.
+//
+num var0w;
+if(var0 > 0){
+cade palabra0 = 'lopez';
+};
+con(num var1=0;var<10;var1++){
+imp(var1);
+};
+cda
+cond
+mun var=9;
+cad estado0='Gto;
+String ciudad1='Apaseo';
+Num pv1=9;
+Cad nombre1='julian';
+sI(pv1==0){
+cad nombre2='josue';
+};
